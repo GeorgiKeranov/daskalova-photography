@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/sweetalert.min.css') }}"/>
+{% endblock %}
+
+{% block content %}
+
+    {{ error }}
+
+    <div class="container mt-4">
+        <div class="text-center">
+            <form method="post" action="{{ path('admin_category_add') }}">
+                <label for="category">New Category</label>
+                <input type="text" id="category" name="category" placeholder="Category Name"/>
+                <button class="btn btn-success mt-3 mt-md-0">Add category</button>
+            </form>
+        </div>
+
+        <div class="table-responsive black-font mt-5">
+            <table class="table-center">
+                <tr>
+                    <th>Category name</th>
+                    <th>Change name</th>
+                    <th>Delete category</th>
+                </tr>
+                {% for category in categories %}
+                <tr>
+                    <td class="name" data-link="{{ category.link }}">{{ category.name }}</td>
+                    <td class="text-right"><button class="btn btn-warning"><span class="fa fa-edit"></span></button></td>
+                    <td class="text-right"><button class="btn btn-danger"><span class="fa fa-remove"></span></button></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/frameworks/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('js/admin/categories.js') }}"></script>
+{% endblock %}

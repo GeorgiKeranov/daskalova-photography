@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    <div class="container mt-3 text-center">
+        <h1>Change username</h1>
+        <form method="POST">
+            <div class="form-group mt-4">
+                <label class="normal-font-size" for="old-username">Old username -> </label>
+                <span class="normal-font-size" id="old-username">dsadsa</span>
+            </div>
+            <div class="form-group mt-2">
+                <label class="normal-font-size" for="new-username">New username:</label>
+                <input id="new-username" name="new-username" type="text"/>
+            </div>
+            <div class="mt-4">
+                <button type="submit" class="btn btn-success">Change It!</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

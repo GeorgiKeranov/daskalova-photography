@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    <div class="container mt-5">
+
+        <h2 class="text-center">Message</h2>
+        <hr/>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="description">
+                    {% if message.title %}
+                        <h4 class="text-center big-font-size">{{ message.title }}</h4>
+                    {% else %}
+                        <h4 class="text-center big-font-size">[ EMPTY TITLE ]</h4>
+                    {% endif %}
+                    <hr/>
+                    <span class="big-font-size">{{ message.message|nl2br }}</span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3>From: {{ message.name }}</h3>
+                <h3>Email: {{ message.email }}</h3>
+                {% if message.phone %}
+                    <h3>Phone: {{ message.phone }}</h3>
+                {% endif %}
+                <h3>Date: {{ message.dateSent|date('H:i, d F Y') }}</h3>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

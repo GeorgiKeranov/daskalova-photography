@@ -27,15 +27,9 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse big-font-size" id="navbarResponsive">
-                        <ul class="navbar-nav">
-                            <li {{ route == 'homepage' ? 'class="nav-item active"' }} class="nav-item">
+                        <ul class="navbar-nav" id="left-navigation">
+                            <li class="nav-item" data-link="/">
                                 <a class="nav-link" href="{{ path('homepage') }}">Home</a>
-                            </li>
-                            <li {{ route == 'gallery' ? 'class="nav-item active"' }} class="nav-item">
-                                <a class="nav-link" href="{{ path('gallery') }}">Portraits</a>
-                            </li>
-                            <li {{ route == 'gallery' ? 'class="nav-item active"' }} class="nav-item">
-                                <a class="nav-link" href="{{ path('gallery') }}">Weddings</a>
                             </li>
                         </ul>
 
@@ -65,11 +59,9 @@
             </div>
         </footer>
 
+        <script src="{{ asset('/js/frameworks/jquery.min.js') }}"></script>
+        <script src="{{ asset('/js/frameworks/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('/js/user/categories.js') }}"></script>
+        {% block javascripts %}{% endblock %}
     </body>
-
-    <script src="{{ asset('/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('/js/popper.min.js') }}"></script>
-    <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('/js/main.js') }}"></script>
-    {% block javascripts %}{% endblock %}
 </html>

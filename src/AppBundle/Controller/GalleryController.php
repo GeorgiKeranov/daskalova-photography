@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Category;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -9,10 +10,13 @@ class GalleryController extends Controller
 {
 
     /**
-     * @Route("/gallery", name="gallery")
+     * @Route("/gallery/{link}", name="gallery")
      */
-    public function galleryAction()
+    public function getGalleryAction(Category $category)
     {
-        return $this->render('gallery/gallery.html.twig');
+
+        return $this->render('gallery/gallery.html.twig', [
+            'category' => $category->getName()
+        ]);
     }
 }

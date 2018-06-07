@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/sweetalert.min.css') }}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="container table-responsive mt-4">
+        <table class="table-center">
+            <thead>
+            <tr>
+                <th>Author's name</th>
+                <th>Title</th>
+                <th>Date</th>
+                <th class="text-center">Options</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for message in messages %}
+                <tr id="message-{{ message.id }}" class="table-warning">
+                    <td>{{ message.name }}</td>
+                    <td>
+                        {% if message.title %}
+                            {{ message.title }}
+                        {% else %}
+                            [ EMPTY TITLE ]
+                        {% endif %}
+                    </td>
+                    <td>{{ message.dateSent|date('H:i, d F Y') }}</td>
+                    <td class="text-center">
+                        <a class="btn btn-success" href="{{ path('admin_message', {'id': message.id}) }}">
+                            <span class="fa fa-eye"></span>
+                        </a>
+                        <button class="btn btn-danger" onclick="deleteMessage({{ message.id }})">
+                            <span class="fa fa-trash"></span>
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/frameworks/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('js/admin/message-delete.js') }}"></script>
+{% endblock %}

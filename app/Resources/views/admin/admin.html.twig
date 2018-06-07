@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    <div class="container mt-3">
+
+        <div class="row mt-3">
+            <div class="col">
+                <a class="btn btn-light btn-block" href="{{ path('admin_settings') }}">
+                    <strong class="big-font-size black-font"><span class="fa fa-cog"></span> Main Settings</strong>
+                </a>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col">
+                <a class="btn btn-light btn-block" href="{{ path('admin_messages') }}">
+                    <strong class="big-font-size black-font"><span class="fa fa-envelope"></span> Messages</strong>
+                </a>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col">
+                <a class="btn btn-light btn-block" href="{{ path('admin_categories') }}">
+                    <strong class="big-font-size black-font"><span class="fa fa-book"></span> Categories</strong>
+                </a>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col">
+                <a class="btn btn-light btn-block">
+                    <strong class="big-font-size black-font"><span class="fa fa-image"></span> Pictures</strong>
+                </a>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col">
+                <a class="btn btn-light btn-block" href="{{ path('admin_username') }}">
+                    <strong class="big-font-size black-font"><span class="fa fa-lock"></span> Change username</strong>
+                </a>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col">
+                <a class="btn btn-light btn-block" href="{{ path('admin_password') }}">
+                    <strong class="big-font-size black-font"><span class="fa fa-lock"></span> Change password</strong>
+                </a>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col">
+                <a class="btn btn-light btn-block" href="{{ path('logout') }}">
+                    <strong class="big-font-size black-font"><span class="fa fa-sign-out"></span> Logout</strong>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -32,7 +32,7 @@ security:
               login_path: /login
               failure_path: /login?error=true
               check_path: /login
-              default_target_path: /
+              default_target_path: /admin
 
             logout:
               path: /logout

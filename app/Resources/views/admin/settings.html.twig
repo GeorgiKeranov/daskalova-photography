@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    <div class="container mt-3">
+
+        <div class="row">
+            <form method="post" enctype="multipart/form-data">
+                <div class="row margin-top-10">
+                    <div class="col-md-4">
+
+                        <h4 class="text-center">Change your portfolio picture</h4>
+                        <span id="remove-portfolio-pic" class="fa fa-remove d-none"></span>
+                        <div class="portfolio-pic text-center">
+                            <img id="portfolio-pic" class="img-thumbnail" src="{{ asset('img/alexandra_index_image.jpg') }}">
+                        </div>
+                        <input id="input-image" name="portfolio_picture" type="file" class="form-control"/>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="row mt-3">
+                            <div class="col">
+                                <h4 class="text-center">Home page large text:</h4>
+                                <input name="home_text" class="form-control" type="text" value="{{ home_large_text }}"/>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col">
+                                <h4 class="text-center">Home page description:</h4>
+                                <textarea rows="3" name="home_description" class="form-control" type="text">{{ home_description }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col">
+                                <h4 class="text-center">Email:</h4>
+                                <input name="email" class="form-control" type="email" value="{{ email }}"/>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col">
+                                <h4 class="text-center">Facebook link:</h4>
+                                <input name="facebook" class="form-control" type="text" value="{{ facebook }}"/>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col">
+                                <button class="btn btn-outline-success btn-block" type="submit">Save changes</button>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col">
+                                <a class="btn btn-outline-danger btn-block" href="{{ path('admin') }}">Cancel</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/admin/settings.js') }}"></script>
+{% endblock %}

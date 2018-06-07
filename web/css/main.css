@@ -25,7 +25,7 @@ hr {
 }
 
 .content {
-    padding-bottom: 40px;
+    padding-bottom: 80px;
 }
 
 footer {
@@ -43,7 +43,6 @@ footer {
     .index-image {
         max-width: 100%;
     }
-
 }
 
 @media(min-width:992px){
@@ -115,4 +114,57 @@ footer {
 .facebook-image {
     max-width: 100%;
     height: 60px;
+    border-radius: 40%;
 }
+
+.black-font {
+    color: #212529;
+}
+
+#remove-portfolio-pic {
+    position: absolute;
+    line-height: 36px;
+    margin-top: -10px;
+    background-color: rgba(255,0,24,0.65);
+    border-radius: 100%;
+    font-size: 20px;
+    text-align: center;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+}
+
+#remove-portfolio-pic:hover {
+    background-color: #ff0018;
+}
+
+@media(max-width:576px){
+
+    .details {
+        font-size: 19px;
+    }
+
+}
+
+.table-center {
+    margin: 0 auto;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+th {
+    border-bottom: 1px solid;
+}
+
+table {
+    color: black;
+}
+
+.normal-font-size {
+    font-size: 20px;
+}
+
+
