@@ -295,8 +295,44 @@ class AdminController extends Controller
         $newPassword1 = $request->get('new-password-1');
         $newPassword2 = $request->get('new-password-2');
 
-        if ($currentPassword && $newPassword1 && $newPassword2) {
-            // TODO
+        if($request->isMethod('POST')) {
+
+            if ($currentPassword && $newPassword1 && $newPassword2) {
+
+                // Check if the two new passwords are not equal.
+                if ($newPassword1 !== $newPassword2) {
+                    return $this->render('admin/change-password.html.twig', [
+                        'error' => 'Your new and confirm password are not the same!'
+                    ]);
+                }
+
+                $repo = $this->getDoctrine()->getRepository(Admin::class);
+                $em = $this->getDoctrine()->getManager();
+
+                // Get admin object.
+                $admin = $repo->findAll()[0];
+
+                $encoder = $this->container->get('security.password_encoder');
+                // Check if currrentPassword is not true.
+                if (!$encoder->isPasswordValid($admin, $currentPassword)) {
+                    return $this->render('admin/change-password.html.twig', [
+                        'error' => 'You have entered wrong your current password'
+                    ]);
+                }
+
+                // Encrypting the new password.
+                $newPasswordEncrypted = $encoder->encodePassword($admin, $newPassword1);
+                $admin->setPassword($newPasswordEncrypted);
+
+                $em->flush();
+
+                return $this->redirectToRoute('admin');
+            }
+            else {
+                return $this->render('admin/change-password.html.twig', [
+                    'error' => 'All fields are required!'
+                ]);
+            }
         }
 
         return $this->render('admin/change-password.html.twig');
@@ -307,18 +343,45 @@ class AdminController extends Controller
      */
     public function adminChangeUsername(Request $request)
     {
-        $admins = $this->getDoctrine()->getRepository(Admin::class)->findAll();
+        $admin = $this->getDoctrine()
+            ->getRepository(Admin::class)
+            ->findAll()[0];
 
-        $oldUsername = $admins[0]->getUsername();
+        $currentUsername = $admin->getUsername();
 
-        $newUsername = $request->get('newUsername');
-        $currentPassword = $request->get('current-password');
+        if($request->isMethod('POST')) {
 
-        if ($currentPassword && $newUsername) {
-            //TODO
+            $newUsername = $request->get('new-username');
+            $currentPassword = $request->get('current-password');
+
+            if ($currentPassword && $newUsername) {
+
+                $encoder = $this->container->get('security.password_encoder');
+                // Check if currrentPassword is not true.
+                if (!$encoder->isPasswordValid($admin, $currentPassword)) {
+                    return $this->render('admin/change-username.html.twig', [
+                        'error' => 'You have entered wrong your current password',
+                        'username' => $currentUsername
+                    ]);
+                }
+
+                $em = $this->getDoctrine()->getManager();
+                $admin->setUsername($newUsername);
+                $em->flush();
+
+                return $this->redirectToRoute('admin');
+
+            } else {
+                return $this->render('admin/change-username.html.twig', [
+                    'error' => 'All fields are required!',
+                    'username' => $currentUsername
+                ]);
+            }
         }
 
-        return $this->render('admin/change-username.html.twig');
+        return $this->render('admin/change-username.html.twig', [
+            'username' => $currentUsername
+        ]);
     }
 
 }
