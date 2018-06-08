@@ -19,4 +19,5 @@ class GalleryController extends Controller
             'category' => $category->getName()
         ]);
     }
+
 }

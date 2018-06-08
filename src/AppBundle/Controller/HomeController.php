@@ -39,29 +39,4 @@ class HomeController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/categories", name="categories")
-     *
-     * @Method({"GET"})
-     */
-    public function getCategoriesAction()
-    {
-
-        $categories = $this->getDoctrine()
-            ->getRepository(Category::class)
-            ->findAll([]);
-
-        $categoriesArr = [];
-
-        foreach($categories as $category) {
-            $assocArr['name'] = $category->getName();
-            $assocArr['link'] = $category->getLink();
-
-            array_push($categoriesArr, $assocArr);
-        }
-
-        return new JsonResponse($categoriesArr);
-    }
-
-
 }

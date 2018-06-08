@@ -30,8 +30,16 @@
 
         <div class="row mt-3">
             <div class="col">
-                <a class="btn btn-light btn-block">
-                    <strong class="big-font-size black-font"><span class="fa fa-image"></span> Pictures</strong>
+                <a class="btn btn-light btn-block" href="{{ path('admin_pictures_add') }}">
+                    <strong class="big-font-size black-font"><span class="fa fa-image"></span> Add Pictures</strong>
+                </a>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col">
+                <a class="btn btn-light btn-block" href="{{ path('admin_pictures_edit') }}">
+                    <strong class="big-font-size black-font"><span class="fa fa-edit"></span> Edit/Delete Pictures</strong>
                 </a>
             </div>
         </div>

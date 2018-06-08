@@ -167,4 +167,14 @@ table {
     font-size: 20px;
 }
 
+.picture-responsive {
+    max-width: 100%;
+    height: auto;
+}
+
+.table-image {
+    max-width: 100px;
+    height: auto;
+}
+
 

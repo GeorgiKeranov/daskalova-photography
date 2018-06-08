@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/sweetalert.min.css') }}"/>
+{% endblock %}
+
+{% block content %}
+
+    <div class="container mt-4">
+        <div class="table-responsive black-font mt-5">
+            <table class="table-center">
+                <tr>
+                    <th>Picture</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                {% for picture in pictures %}
+                <tr>
+                    <td>
+                        <img class="table-image" src="../uploads/{{ picture.pictureName }}">
+                    </td>
+                    <td>{{ picture.category.name }}</td>
+                    <td>{{ picture.description|length > 30 ? picture.description|slice(0, 30    ) ~ '...' : picture.description  }}</td>
+                    <td class="text-right"><a class="btn btn-warning" href="{{ path('admin_picture_edit', {'id': picture.id}) }}"><span class="fa fa-edit"></span></a></td>
+                    <td class="text-right"><button class="btn btn-danger" data-id="{{ picture.id }}"><span class="fa fa-remove"></span></button></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{ asset('js/frameworks/sweetalert.min.js') }}"></script>
+<script src="{{ asset('js/admin/picture.js') }}"></script>
+{% endblock %}
