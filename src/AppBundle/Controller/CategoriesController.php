@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Category;
+use AppBundle\Entity\Picture;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -125,7 +126,18 @@ class CategoriesController extends Controller
      */
     public function adminDeleteCategoryAction(Category $category)
     {
-        // TODO HANDLE ERROR WHEN THERE ARE PICTURES IN THIS CATEGORY
+        $picturesRepo = $this->getDoctrine()
+            ->getRepository(Picture::class);
+
+        // Check if there are pictures in that category so it can't be deleted.
+        $pictures = $picturesRepo->findBy(['category' => $category]);
+
+        if ($pictures != null) {
+            return new JsonResponse([
+                'error' => 'There are pictures in this category. Delete them or move them in other category'
+                ]);
+        }
+
         $em = $this->getDoctrine()->getManager();
 
         $em->remove($category);

@@ -1,9 +1,45 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/baguetteBox.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/thumbnail-gallery.css') }}">
+{% endblock %}
+
 {% block content %}
 
-    <div class="container mt-3">
-        Gallery page for {{ category }}
+    <div class="container gallery-container mt-2">
+
+        <h2 class="text-center mb-3">{{ category }}</h2>
+
+        <div class="tz-gallery">
+
+            <div class="row">
+
+                {% for picture in pictures %}
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <a class="thumbnail text-dec-none" href="/uploads/{{ picture.pictureName }}">
+                        <div class="lightbox image-container">
+                            <img class="img-gallery" src="/uploads/{{ picture.pictureName }}">
+                        </div>
+                        <div class="caption">
+                            <span class="small-font-size black-font">{{ picture.description }}</span>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+
     </div>
 
+
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{ asset('js/frameworks/baguetteBox.min.js') }}"></script>
+<script>
+    baguetteBox.run('.tz-gallery');
+</script>
 {% endblock %}

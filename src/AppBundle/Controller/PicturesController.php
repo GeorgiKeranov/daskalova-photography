@@ -154,7 +154,7 @@ class PicturesController extends Controller
 
         $em->flush();
 
-        return $this->redirectToRoute('admin');
+        return $this->redirectToRoute('admin_pictures_edit');
     }
 
 

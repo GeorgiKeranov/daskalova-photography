@@ -33,7 +33,7 @@ $(document).ready(function() {
                     tableRow.remove();
                 },
                 error: function(error) {
-                    swal('Error', 'Picture with that id is not existing!', 'error');
+                    swal('Error', 'Picture with that id is not existing! Try refreshing the page.', 'error');
                 }
             });
 

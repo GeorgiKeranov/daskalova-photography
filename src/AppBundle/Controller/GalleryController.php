@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Category;
+use AppBundle\Entity\Picture;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -14,9 +15,13 @@ class GalleryController extends Controller
      */
     public function getGalleryAction(Category $category)
     {
+        $pictures = $this->getDoctrine()
+            ->getRepository(Picture::class)
+            ->findBy(['category' => $category]);
 
         return $this->render('gallery/gallery.html.twig', [
-            'category' => $category->getName()
+            "pictures" => $pictures,
+            "category" => $category->getName()
         ]);
     }
 

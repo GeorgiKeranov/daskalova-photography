@@ -63,36 +63,34 @@ $(document).ready(function() {
     $('.btn-danger').on("click", function() {
 
         var nameColumn = $(this).parent().parent().find('.name');
+        var name = nameColumn.text();
 
-        swal({
-                title: "Are you sure?",
-                text: "Are you sure you want to delete this category?",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonText: "Delete it!",
-                confirmButtonColor: "#ec6c62"
-            }, function() {
+        $.ajax({
+            url: '/admin/categories/' + name + '/delete',
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function(data) {
+                // Error from the server.
+                if(data['error']) {
+                    swal('Error', data['error'], 'error');
+                }
+                // No error from the server.
+                else {
+                    swal('Success', 'Category is deleted!', 'success');
 
-                $.ajax({
-                    url: '/admin/categories/' + nameColumn.text() + '/delete',
-                    processData: false,
-                    contentType: false,
-                    type: 'POST',
-                    success: function (data) {
-                        swal('Success', 'Category deleted successfully.', 'success');
+                    var link = nameColumn.attr('data-link');
 
-                        var link = nameColumn.attr('data-link');
+                    nameColumn.parent().remove();
 
-                        nameColumn.parent().remove();
+                    $('[data-link="' + '/gallery/' + link + '"]').remove();
+                }
+            },
+            error: function() {
+                swal('Error', 'Server error, try deleting category later.', 'warning');
+            }
+        });
 
-                        $('[data-link="' + '/gallery/' + link + '"]').remove();
-                    },
-                    error: function(error) {
-                        swal('Error', 'Category with that name is not existing!', 'error');
-                    }
-                });
-
-            });
     });
 
 });

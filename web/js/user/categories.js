@@ -27,7 +27,7 @@ function setActiveLink(link) {
 
 var menuOptionPrototype =
     "<li class=\"nav-item\" data-link=\"/gallery/__LINK__\">\n" +
-    "<a class=\"nav-link\" href=\"../gallery/__LINK__\">__NAME__</a>\n" +
+    "<a class=\"nav-link\" href=\"/gallery/__LINK__\">__NAME__</a>\n" +
     "</li>";
 
 function loadAllCategoriesAJAX() {
