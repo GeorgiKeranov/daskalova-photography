@@ -29,10 +29,12 @@ class ContactsController extends Controller
     {
         $email = $this->getSiteText('email');
         $facebook = $this->getSiteText('facebook');
+        $image = $this->getSiteText('home_page_image');
 
         return $this->render('contacts/contacts.html.twig', [
             'email' => $email,
-            'facebook' => $facebook
+            'facebook' => $facebook,
+            'home_page_image' => $image
         ]);
     }
 

@@ -7,6 +7,7 @@ use AppBundle\Entity\SiteText;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends Controller
@@ -43,6 +44,22 @@ class AdminController extends Controller
         return "";
     }
 
+    private function saveImage(File $imageFile)
+    {
+        // Creating unique name for the image.
+        $imageName = md5(uniqid()) . '.' . $imageFile->guessExtension();
+        // Saving the image in local directory.
+        $imageFile->move('uploads', $imageName);
+
+        // Returning the new name for the image.
+        return $imageName;
+    }
+
+    private function deleteImageByName($name)
+    {
+        unlink('uploads/' . $name);
+    }
+
     /**
      * @Route("/login", name="login")
      */
@@ -74,12 +91,14 @@ class AdminController extends Controller
     public function adminSettingsAction()
     {
 
+        $homeImage = $this->getSiteText('home_page_image');
         $homeLargeText = $this->getSiteText('home_page_text');
         $homeDescription = $this->getSiteText('home_page_description');
         $email = $this->getSiteText('email');
         $facebook = $this->getSiteText('facebook');
 
         return $this->render('admin/settings.html.twig', [
+            'home_page_image' => $homeImage,
             'home_large_text' => $homeLargeText,
             'home_description' => $homeDescription,
             'email' => $email,
@@ -101,7 +120,14 @@ class AdminController extends Controller
         $facebook = $request->get('facebook');
 
         if ($image != null) {
-            $image->move('img/', 'alexandra_index_image.jpg');
+            $currentImageName = $this->getSiteText('home_page_image');
+
+            if($currentImageName != null) {
+                // Delete the old image.
+                $this->deleteImageByName($currentImageName);
+            }
+
+            $this->addSiteText('home_page_image', $this->saveImage($image));
         }
 
         if ($largeText) {
