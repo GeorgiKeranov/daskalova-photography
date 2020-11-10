@@ -1,5 +1,4 @@
 daskalova-photography
 =====================
 
-Photographer Portfolio
-Custom CMS created with Symfony
+Photographer Portfolio, custom CMS created with Symfony
