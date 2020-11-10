@@ -1,4 +1,6 @@
 daskalova-photography
 =====================
 
-Custom project created with Symfony about photographer
+# Photographer Portfolio
+
+## Symfony custom CMS
